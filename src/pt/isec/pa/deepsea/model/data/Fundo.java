@@ -1,4 +1,4 @@
-package pt.isec.pa.deepsea.model;
+package pt.isec.pa.deepsea.model.data;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,8 +8,12 @@ import java.util.Set;
 public class Fundo {
     private Set<IObstaculo> obstaculos; //Array com a lista dos obstaculos existentes
     private Obstaculo obstaculo;
+    private boolean visivel;
 
     public Fundo() {
         this.obstaculos = new HashSet<IObstaculo>();
+        this.visivel = false;
     }
+
+
 }

@@ -1,7 +1,6 @@
-package pt.isec.pa.deepsea.model;
+package pt.isec.pa.deepsea.model.data;
 
 //COMO SABEMOS O TAMANHO DE CADA UMA DAS 3 GRELHAS?
-
 
 
 public class Jogo {
