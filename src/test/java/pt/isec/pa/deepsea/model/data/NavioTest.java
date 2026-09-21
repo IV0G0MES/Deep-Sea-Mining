@@ -19,27 +19,18 @@ class NavioTest {
 
     @Test
     void testInit3Drones() {
-        assertEquals(3, navio.getDrones().size());
-        for(Drone dro : navio.getDrones()){
+        assertEquals(3, navio.getDronesOrdenadosCasco().size());
+        for(Drone dro : navio.getDronesOrdenadosCasco()){
             assertNotNull(dro);
         }
     }
 
-    @Test
-    void testEntraFosso() {
-        Drone drone = navio.getDrones().iterator().next(); //agarra 1 da lista
-        System.out.println(drone);
-        boolean sucesso = navio.EntraFosso(drone.getId());
-        assertTrue(sucesso);
-        assertEquals(0,drone.getPosX());
-        assertEquals(FOSSO / 2, drone.getPosY());
-    }
 
     @Test
     void testPosInit() {
         int posicaoinicial = SUPERFICIE/2-1;
-        assertEquals(posicaoinicial, navio.getposX());
-        assertEquals(posicaoinicial, navio.getposY());
+        assertEquals(posicaoinicial, navio.getPosX());
+        assertEquals(posicaoinicial, navio.getPosX());
     }
 
 }

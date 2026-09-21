@@ -1,7 +1,10 @@
 package pt.isec.pa.deepsea.model.data;
 
 public class Monstro extends Obstaculo implements ElementoFundo{
-    boolean visivel;
+
+    private static final long serialVersionUID = 1L;
+
+    private boolean visivel;
 
 
     public Monstro(int x,int y){
@@ -9,10 +12,6 @@ public class Monstro extends Obstaculo implements ElementoFundo{
         this.visivel = false;
     }
 
-    @Override
-    public double getPenalizacao() {
-        return 0;
-    }
 
     @Override
     public boolean isVisivel(){
@@ -23,4 +22,5 @@ public class Monstro extends Obstaculo implements ElementoFundo{
     public void setVisivel(boolean visivel) {
         this.visivel = visivel;
     }
+
 }

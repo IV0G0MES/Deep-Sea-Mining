@@ -1,6 +1,9 @@
 package pt.isec.pa.deepsea.model.data;
 
 public class Agua implements ElementoFundo{
+
+    private static final long serialVersionUID = 1L;
+
     private boolean visivel;
 
     public Agua(){
@@ -16,4 +19,5 @@ public class Agua implements ElementoFundo{
     public void setVisivel(boolean visivel) {
         this.visivel = visivel;
     }
+
 }

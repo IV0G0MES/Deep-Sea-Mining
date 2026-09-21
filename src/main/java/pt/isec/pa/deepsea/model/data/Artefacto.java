@@ -3,18 +3,16 @@ package pt.isec.pa.deepsea.model.data;
 import java.util.ArrayList;
 
 public class Artefacto extends Item implements ElementoFundo{
+
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private static int Proxid = 0;
-    private int posX;
-    private int posY;
     private boolean visivel;
 
-
-    public Artefacto(int posX,int posY){
+    public Artefacto(){
         this.visivel = false;
         this.id = ++Proxid;
-        this.posX = posX;
-        this.posY = posY;
     }
 
     public int getId(){
@@ -47,4 +45,5 @@ public class Artefacto extends Item implements ElementoFundo{
     public void setVisivel(boolean visivel) {
         this.visivel = visivel;
     }
+
 }

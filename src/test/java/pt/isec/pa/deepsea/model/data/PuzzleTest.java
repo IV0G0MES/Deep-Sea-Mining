@@ -2,7 +2,7 @@ package pt.isec.pa.deepsea.model.data;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pt.isec.pa.deepsea.model.data.Settings.Settings;
+import static pt.isec.pa.deepsea.model.data.Settings.Settings.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,12 +11,12 @@ class PuzzleTest {
 
     @BeforeEach
     void setUp() {
-        puzzle = new Puzzle(Settings.MAX_MOVES_PUZZLE);
+        puzzle = new Puzzle(MAX_MOVES_PUZZLE);
     }
 
     @Test
     void testSetPuzzle(){
-        assertEquals(Settings.MAX_MOVES_PUZZLE, puzzle.getMovesLeft(),
+        assertEquals(MAX_MOVES_PUZZLE, puzzle.getMovesLeft(),
                 "Os movimentos inicias tem q ser iguais ao das Settings.MAX_MOVES_PUZZLE");
         assertFalse(puzzle.isResolved());
     }

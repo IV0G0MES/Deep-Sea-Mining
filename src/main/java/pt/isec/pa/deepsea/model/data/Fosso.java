@@ -1,23 +1,70 @@
 package pt.isec.pa.deepsea.model.data;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import static pt.isec.pa.deepsea.model.data.Settings.Settings.*;
 
-public class Fosso{
+
+/**
+ * Classe responsável pela gestão e geração do Fosso, a zona de transição vertical do jogo.
+ * <p>
+ * Esta classe gere uma grelha bidimensional de {@link ElementoFosso}, controlando a
+ * geração de obstáculos (Rochas), fauna (Animais Marinhos) e perigos
+ * ambientais (Correntes Marítimas). Inclui algoritmos distintos para o modo normal
+ * e para o modo de defesa.
+ * </p>
+ * * @author João Barão, Ivo Gomes, Inês Moreira
+ * @version 1.0
+ */
+public class Fosso implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+    /** Grelha bidimensional que armazena os elementos presentes no Fosso. */
     private ElementoFosso[][] fosso;
+
+    /**
+     * Construtor da classe Fosso.
+     * Inicializa a grelha com as dimensões definidas nas Settings
+     * e despoleta os métodos de geração automática de terreno e elementos.
+     */
     public Fosso(){
         this.fosso=new ElementoFosso[FOSSO][FOSSO];
         geraRochas();
         geraAnimalCorrente();
     }
 
+
+    /**
+     * Devolve a estrutura completa da grelha do fosso.
+     * @return Matriz de {@link ElementoFosso}.
+     */
     public ElementoFosso[][] getFosso(){
         return fosso;
     }
 
+    /**
+     * Obtém o elemento presente numa coordenada específica.
+     * @param x Coordenada da linha (X).
+     * @param y Coordenada da coluna (Y).
+     * @return O {@link ElementoFosso} na posição indicada ou null se estiver vazia.
+     */
     public ElementoFosso getElementoFosso(int x,int y){
         return fosso[x][y];
     }
 
+
+    /**
+     * Gera as paredes de rocha do fosso.
+     * <p>
+     * Se o MODO_DEFESA estiver ativo, gera paredes retas nas extremidades.
+     * Caso contrário, utiliza um algoritmo de oscilação aleatória para criar um percurso
+     * irregular, garantindo que a soma das rochas à esquerda e à direita não bloqueia
+     * totalmente a passagem do drone.
+     * </p>
+     */
     public void geraRochas(){
         if(MODO_DEFESA){
             for (int i = 0; i < FOSSO; i++) {
@@ -71,6 +118,24 @@ public class Fosso{
         }
     }
 
+    public List<Obstaculo> getObstaculos(){
+        List<Obstaculo> obstaculos=new ArrayList<>();
+        for(int i=0;i<FOSSO;i++){
+            for(int j=0;j<FOSSO;j++){
+                ElementoFosso elemento=fosso[i][j];
+                    if (elemento instanceof Obstaculo) {
+                        obstaculos.add((Obstaculo) elemento);
+                    }
+            }
+        }
+        return obstaculos;
+    }
+
+
+    /**
+     * Popula os espaços vazios do fosso com animais marinhos ou correntes marítimas.
+     * A geração baseia-se nas probabilidades definidas nas Settings
+     */
     public void geraAnimalCorrente() {
         if(MODO_DEFESA) {
             int meioFosso=FOSSO/2;
@@ -98,6 +163,10 @@ public class Fosso{
         }
     }
 
+    /**
+     * Remove todos os elementos dinâmicos (Animais e Correntes) da grelha,
+     * preservando apenas as estruturas rochosas.
+     */
     public void limpaAnimaisCorrentes(){
         for (int i = 0; i < FOSSO; i++) {
             for (int j = 0; j < FOSSO; j++) {
@@ -108,6 +177,11 @@ public class Fosso{
         }
     }
 
+
+    /**
+     * Gera uma representação visual do Fosso em modo texto.
+     * @return String formatada representando a grelha: [R] Rocha, [A] Animal, [C] Corrente.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
